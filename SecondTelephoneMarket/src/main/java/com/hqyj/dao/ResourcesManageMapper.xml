@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.ResourcesManageMapper">
+	<resultMap id="resourcesManage" type="com.hqyj.entity.ResourcesManage">
+		<result column="id" property="id"></result>
+		<result column="type" property="type"></result>
+        <result column="supplier" property="supplier"></result>
+        <result column="purchaseprice" property="purchaseprice"></result>
+        <result column="sellingprice" property="sellingprice"></result>
+		<result column="path" property="path"></result>
+        <result column="discription" property="discription"></result>
+	</resultMap>
+
+
+
+<insert id="addNewResources"   parameterType="com.hqyj.entity.ResourcesManage">
+insert into resourcesmanage(type,supplier,purchaseprice,sellingprice,path,discription) values (#{type},#{supplier},#{purchasePrice},#{sellingPrice},#{path},#{discription})
+</insert>
+
+<select id="selectAllNewResources" resultMap="resourcesManage">
+select *from resourcesmanage
+</select>
+
+<insert id="insertGoods" parameterType="String">
+insert into goods(g_type,g_discription,g_price) select type,supplier,purchaseprice from resourcesmanage where type=#{type}
+</insert>
+
+<insert id="insertGoodsStatistics" parameterType="String">
+insert into goodsstatistics(type,discription,price) select type,supplier,purchaseprice from resourcesmanage where type=#{type}
+</insert>
+
+<insert id="insertProduct" parameterType="String">
+insert into product(p_type,p_discription,p_price) select type,discription,sellingprice from resourcesmanage where type=#{type}
+</insert>
+
+<insert id="insertproductSaled" parameterType="String">
+insert into productsaled(type,discription,price) select type,discription,sellingprice from resourcesmanage where type=#{type}
+</insert>
+
+</mapper>

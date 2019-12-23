@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.OrderMapper">
+	<resultMap id="order" type="com.hqyj.entity.Order">
+		<result column="o_id" property="o_id"></result>
+		<result column="name" property="name"></result>
+		<result column="type" property="type"></result>
+<result column="num" property="num"></result>
+	</resultMap>
+
+
+
+<insert id="insertOrder"   parameterType="com.hqyj.entity.Order">
+insert into orders(name,type,num) values (#{name},#{type},#{num})
+</insert>
+
+<delete id="deletOrder"  parameterType="String">
+delete from orders where name=#{name}
+</delete>
+
+<select id="selectAllOrder" resultMap="order">
+select *from orders
+</select>
+
+<insert id="addGoodsExported" parameterType="String">
+ insert into goodsexported (type,num) select type,num from orders where name=#{name};
+</insert>
+
+</mapper>

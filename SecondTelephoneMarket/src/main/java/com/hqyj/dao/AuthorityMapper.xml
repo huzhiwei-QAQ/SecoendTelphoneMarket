@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.AuthorityMapper">
+	<resultMap id="authority" type="com.hqyj.entity.Authority">
+		<result column="a_id" property="a_id"></result>
+		<result column="authoritys" property="authoritys"></result>
+		<result column="authority_url" property="authority_url"></result>
+
+	</resultMap>
+	<select id="selecAuthorityAll"  parameterType="String" resultMap="authority">
+select authority.a_id,authority.authoritys,authority.authoritys_url from user ,role,authority,user_role,role_authority where user.u_id=user_role.u_id and role.r_id=user_role.r_id and role.r_id=role_authority.r_id and authority.a_id=role_authority.a_id and user.username=#{username}
+</select>
+</mapper>

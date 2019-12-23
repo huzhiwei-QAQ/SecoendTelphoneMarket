@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.PurchaseOrdersMapper">
+	<resultMap id="purchaseOrders" type="com.hqyj.entity.PurchaseOrders">
+		<result column="po_id" property="po_id"></result>
+		<result column="type" property="type"></result>
+<result column="num" property="num"></result>
+<result column="supplier" property="supplier"></result>
+	</resultMap>
+
+
+
+<insert id="addPurchaseOrders"   parameterType="com.hqyj.entity.PurchaseOrders">
+insert into purchaseorders(type,num,supplier) values (#{type},#{num},#{supplier})
+</insert>
+
+<delete id="deleteaddPurchaseOrders"  parameterType="String">
+delete from purchaseorders where supplier=#{supplier}
+</delete>
+
+<select id="selectPurchaseOrders" resultMap="purchaseOrders">
+select *from purchaseorders
+</select>
+
+<insert id="addWarehousing" parameterType="String">
+ insert into goodsin (type,num) select type,num from purchaseorders where supplier=#{supplier};
+</insert>
+
+</mapper>

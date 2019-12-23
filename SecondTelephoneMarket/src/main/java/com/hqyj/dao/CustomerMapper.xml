@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.CustomerMapper">
+	<resultMap id="customer" type="com.hqyj.entity.Customer">
+		<result column="c_id" property="c_id"></result>
+		<result column="name" property="name"></result>
+		<result column="type" property="type"></result>
+<result column="num" property="num"></result>
+	</resultMap>
+
+<select id="selectAllCustomer"   resultMap="customer">
+select *from customer
+</select>
+
+<insert id="addCustomer" parameterType="com.hqyj.entity.Customer">
+insert into customer(name,type,num) values (#{name},#{type},#{num})
+</insert>
+</mapper>

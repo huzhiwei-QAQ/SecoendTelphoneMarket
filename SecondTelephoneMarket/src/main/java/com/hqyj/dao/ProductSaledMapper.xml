@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.ProductSaledMapper">
+	<resultMap id="productsaled" type="com.hqyj.entity.ProductSaled">
+		<result column="ps_id" property="ps_id"></result>
+		<result column="type" property="type"></result>
+		<result column="discription" property="discription"></result>
+<result column="num" property="num"></result>
+<result column="price" property="price"></result>
+<result column="priceall" property="priceall"></result>
+	</resultMap>
+	
+<select id="selectAllProductSaled"  resultMap="productsaled">
+select *from productsaled 
+</select>
+
+<update id="updateProductSaledNum" parameterType="com.hqyj.entity.ProductSaled">
+update productsaled set num=num+#{num} where type=#{type}
+</update>
+<update id="updateProductSaledNumprice" parameterType="com.hqyj.entity.ProductSaled">
+update productsaled set priceall=priceall+#{num}*price where type=#{type}
+</update>
+
+<select id="selectProductSaledOne"  resultMap="productsaled">
+select *from productsaled where type=#{type}
+</select>
+
+<select id="selectCount2"  resultMap="productsaled">
+select sum(priceall) as price from productsaled
+</select>
+
+
+</mapper>

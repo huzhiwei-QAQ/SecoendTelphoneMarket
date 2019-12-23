@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.GoodsStatisticsMapper">
+	<resultMap id="goodsStatistics" type="com.hqyj.entity.GoodsStatistics">
+		<result column="gs_id" property="gs_id"></result>
+		<result column="type" property="type"></result>
+		<result column="discription" property="discription"></result>
+		<result column="price" property="price"></result>
+		<result column="num" property="num"></result>
+		<result column="priceall" property="priceall"></result>
+	</resultMap>
+
+
+
+<select id="selectGoodsStatistics"   resultMap="goodsStatistics">
+select *from goodsstatistics
+</select>
+
+<update id="updateGoodsStatistics" parameterType="com.hqyj.entity.GoodsStatistics">
+update goodsstatistics set num=num+#{num} where type=#{type}
+</update>
+<update id="updateGoodsStatisticsPrice" parameterType="com.hqyj.entity.GoodsStatistics">
+update goodsstatistics set priceall=priceall+#{num}*price where type=#{type}
+</update>
+
+<select id="selectGoodsStatisticsOne"  parameterType="String"  resultMap="goodsStatistics">
+select *from goodsstatistics where type=#{type}
+</select>
+
+<select id="selectCount1"   resultMap="goodsStatistics">
+select sum(priceall) as price from goodsstatistics
+</select>
+</mapper>

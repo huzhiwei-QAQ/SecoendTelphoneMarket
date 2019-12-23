@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.ProductMapper">
+	<resultMap id="product" type="com.hqyj.entity.Product">
+		<result column="p_id" property="p_id"></result>
+		<result column="p_type" property="p_type"></result>
+		<result column="p_discription" property="p_discription"></result>
+<result column="p_num" property="p_num"></result>
+<result column="p_url" property="p_url"></result>
+<result column="p_price" property="p_price"></result>
+	</resultMap>
+
+
+
+<select id="selectAll"   resultMap="product">
+select *from product
+</select>
+
+<update id="updateProductNum" parameterType="com.hqyj.entity.Product">
+update product set p_num=p_num-#{p_num} where p_type=#{p_type}
+</update>
+
+<update id="updateProduct" parameterType="com.hqyj.entity.Product">
+update product set p_num=p_num+#{p_num} where p_type=#{p_type}
+</update>
+
+</mapper>

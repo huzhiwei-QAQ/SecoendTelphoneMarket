@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.UserRoleMapper">
+	<resultMap id="userRole" type="com.hqyj.entity.UserRole">
+		<result column="u_id" property="u_id"></result>
+		<result column="r_id" property="r_id"></result>
+	</resultMap>
+
+
+
+<insert id="addUserRole"  parameterType="com.hqyj.entity.UserRole" >
+insert into user_role (u_id,r_id) values (#{u_id},#{r_id})
+</insert>
+
+<delete id="deletUserRole" parameterType="int">
+delete from user_role where u_id=#{u_id}
+</delete>
+
+<update id="updateUserRole" parameterType="com.hqyj.entity.UserRole" >
+update user_role set r_id=#{r_id} where u_id=#{u_id}
+
+</update>
+</mapper>
