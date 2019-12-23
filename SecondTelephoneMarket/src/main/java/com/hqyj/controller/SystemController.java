@@ -115,7 +115,7 @@ public class SystemController {
 		req.getRequestDispatcher("product.jsp").forward(req, resp);
 	}
 
-	// 查询所用供应商
+	// 查询所用供应商111
 	@RequestMapping(value = "/getSupplier", method = RequestMethod.GET)
 	public void selectAllsupplier(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
