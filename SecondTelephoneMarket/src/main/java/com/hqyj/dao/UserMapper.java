@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.alibaba.druid.sql.dialect.oracle.ast.stmt.OracleConstraint.Initially;
 import com.hqyj.entity.Authority;
 import com.hqyj.entity.User;
 
@@ -17,4 +18,10 @@ public List<User> selectUserAll();
 
 //删除员工
 public  int deleteUserbyName(String username);
+
+//修改验证码
+public int updateVerificationCode(User user);
+
+//修改密码
+public int updatePassword(User user);
 }

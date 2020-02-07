@@ -4,18 +4,22 @@ public class NewUser {
 private int nu_id;
 private String name;
 private String password;
+private String email;
 private String roles;
 public NewUser() {
 	super();
 	// TODO Auto-generated constructor stub
 }
-public NewUser(int nu_id, String name, String password, String roles) {
+
+public NewUser(int nu_id, String name, String password, String email, String roles) {
 	super();
 	this.nu_id = nu_id;
 	this.name = name;
 	this.password = password;
+	this.email = email;
 	this.roles = roles;
 }
+
 public int getNu_id() {
 	return nu_id;
 }
@@ -40,10 +44,23 @@ public String getRoles() {
 public void setRoles(String roles) {
 	this.roles = roles;
 }
+
+
+public String getEmail() {
+	return email;
+}
+
+public void setEmail(String email) {
+	this.email = email;
+}
+
 @Override
 public String toString() {
-	return "NewUser [nu_id=" + nu_id + ", name=" + name + ", password=" + password + ", roles=" + roles + "]";
+	return "NewUser [nu_id=" + nu_id + ", name=" + name + ", password=" + password + ", email=" + email + ", roles="
+			+ roles + "]";
 }
+
+
 
 
 }

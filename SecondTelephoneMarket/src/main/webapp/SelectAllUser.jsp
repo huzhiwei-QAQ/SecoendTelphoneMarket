@@ -45,7 +45,7 @@
                         	   <th>ID</th>
 							
 								<th>姓名</th>
-							    <th>密码</th>
+							    <th>邮箱</th>
 							    
 								<th class="text-right">职位</th>
 
@@ -54,7 +54,7 @@
                                 <td ><a href="#" style="color: #4d86f6"> <c:out value=" ${selectUserAll.u_id}"></c:out></a></td>
                                   <td ><a href='#' style="color: #4d86f6"> <c:out value="${selectUserAll.username }"></c:out></a></td>
                               
-                                   <td ><a href="#" style="color: #4d86f6"><c:out value="${selectUserAll.password }"></c:out></a></td>
+                                   <td ><a href="#" style="color: #4d86f6"><c:out value="${selectUserAll.email }"></c:out></a></td>
                                    
                                      <td class="text-right"><a href="#" style="color: #4d86f6"><c:out value="${selectUserAll.role.roles }"></c:out></a></td> 
 

@@ -150,6 +150,13 @@
       <version>2.10.4</version>
       <type>pom</type>
     </dependency>
+    
+    <!--加入发送邮件的依赖  -->
+    <dependency>
+    <groupId>javax.mail</groupId>
+    <artifactId>mail</artifactId>
+    <version>1.4.7</version>
+</dependency>
 
 <!-- shiro 整合 Spring  结束 -->
 

@@ -7,13 +7,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="nu_id" property="nu_id"></result>
 		<result column="name" property="name"></result>
 		<result column="password" property="password"></result>
-	<result column="roles" property="roles"></result>
+	    <result column="roles" property="roles"></result>
+	    <result column="email" property="email"></result>
 	</resultMap>
 
 
 
 <insert id="addNewUser"  parameterType="com.hqyj.entity.NewUser" >
-insert into new_user(name,password,roles) values(#{name},#{password},#{roles})
+insert into new_user(name,password,roles,email) values(#{name},#{password},#{roles},#{email})
 </insert>
 
 <select id="selectNewUser"  resultMap="newUser">
@@ -21,7 +22,7 @@ select *from new_user
 </select>
 
 <insert id="addUser" parameterType="String">
-insert into user (username,password) select name,password from new_user where name=#{name}
+insert into user (username,password,email) select name,password,email from new_user where name=#{name}
 </insert>
 
 <delete id="deletNewUser" parameterType="String"  >

@@ -139,11 +139,22 @@
                         <label for="remember"><input type="checkbox"name="remember" id="remember" value="true" /> 
                            &nbsp; 记 住 密 码</label>
                         <p>
-                            <button type="submit">登录</button>  
+                            <button type="submit">登录</button>      
                         </p>
+                        
                         <a href="#">新员工注册？</a>
+       
                         <p>
                            <a class="btn btn-primary" href="/SecondTelephoneMarket/getaddNewUser" role="button">点击注册</a>
+                               </p>
+
+                                  
+                                  
+                        <a href="#">忘记密码？</a>
+                          <p>
+                          
+                             <a class="btn btn-primary" href="/SecondTelephoneMarket/getNewPassword" role="button">找回密码</a> 
+                             </p> 
                     </div>
   </div>
   </form>
@@ -154,19 +165,19 @@
  <h2 class="font-bold">Welcome to Login</h2>
 
                 <p>
-                    Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+                    The system is a second-hand ERP mobile phone mall management system.
                 </p>
 
                 <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                    The system optimizes the scheduling and dynamic control of the whole company's supply chain from purchase to sales,
                 </p>
 
                 <p>
-                    When an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                     and efficiently integrates the operation of the whole supply chain such as purchase management, inventory management, sales management, order management, etc.
                 </p>
 
                 <p>
-                    <small>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</small>
+                    <small> Better help the company to manage its business, resources and human resources.</small>
                 </p>
   
                 </div>

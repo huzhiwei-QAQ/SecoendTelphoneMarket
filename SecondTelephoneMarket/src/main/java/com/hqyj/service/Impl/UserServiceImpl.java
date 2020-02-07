@@ -32,5 +32,17 @@ public int deleteUserbyName(String username) {
 	return deleteUserbyName;
 }
 
+@Override
+public int updateVerificationCode(User user) {
+	int updateVerificationCode = UserMapper.updateVerificationCode(user);
+	return updateVerificationCode;
+}
+
+@Override
+public int updatePassword(User user) {
+	int updatePassword = UserMapper.updatePassword(user);
+	return updatePassword;
+}
+
 
 }

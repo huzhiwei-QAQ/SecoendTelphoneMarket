@@ -29,6 +29,7 @@ import com.github.pagehelper.PageInfo;
 import com.hqyj.dao.ProductSaledMapper;
 import com.hqyj.dao.ResourcesManageMapper;
 import com.hqyj.entity.Customer;
+import com.hqyj.entity.Email;
 import com.hqyj.entity.Goods;
 import com.hqyj.entity.GoodsExported;
 import com.hqyj.entity.GoodsIn;
@@ -62,6 +63,18 @@ import com.hqyj.service.RoleService;
 import com.hqyj.service.SupplierService;
 import com.hqyj.service.UserRoleService;
 import com.hqyj.service.UserService;
+
+import java.util.Properties;
+import java.util.Random;
+
+import javax.mail.Message;
+import javax.mail.Message.RecipientType;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 
 
@@ -444,14 +457,14 @@ public class SystemController {
 	
 	//添加新员工
 	@RequestMapping(value = "/addnewusers", method = RequestMethod.POST)
-	public String addNewUsers(String name,String password,String roles) throws InterruptedException{
+	public String addNewUsers(String name,String password,String roles,String email) throws InterruptedException{
 		//将密码加盐加密
 		Object hashedCredentials = new SimpleHash("MD5", password, name, 1024);
 		NewUser newUser=new NewUser();
 		newUser.setPassword(hashedCredentials.toString());
 		newUser.setName(name);
 		newUser.setRoles(roles);
-		
+		newUser.setEmail(email);
 		newUserService.addNewUser(newUser);
 		Thread thread = new Thread();// 休眠两秒
 		thread.sleep(2000);
@@ -682,6 +695,109 @@ req.setAttribute("pageInfo", pageInfo);
 	    //往产品结算表中增加新机型
 		resourcesManageService.insertproductSaled(type);
 		return addNewResources;
+		
+	}
+	
+	@RequestMapping(value="/getNewPassword",method=RequestMethod.GET)
+	public String getPassword(){
+		return "GetNewPassword";
+	}
+	
+	//发送验证码
+	@RequestMapping(value="/getverificationCode",method=RequestMethod.POST)
+	@ResponseBody
+	public int getVerificationCode(String username,String email,HttpServletRequest req,HttpServletResponse resp) throws AddressException, MessagingException{
+		
+		
+		//判断用户邮箱是否正确
+		if(userService.selectUser(username).getEmail().equals(email)){
+			
+			StringBuilder str = new StringBuilder();
+	        Random random = new Random();
+	        for (int i = 0; i < 6; i++) {
+	            str.append(random.nextInt(10));
+	            }
+	        //将验证码放入用户表
+	        User user=new User();
+	        user.setUsername(username);
+	        user.setVerificationCode(str.toString());
+	       userService.updateVerificationCode(user); 
+	        
+
+			Email mail=new Email();
+			//发件人邮箱地址
+			mail.setSender("huzhiwe1@163.com");
+			//邮箱账号
+			mail.setUserName("huzhiwe1");
+		    //邮箱客户端授权码
+			mail.setPassword("1733296693qaz");
+			//创建邮件对象
+			Session session=null;
+			Properties properties=new Properties();
+			//发送方邮件服务器地址，要根据邮箱的不同需要自行设置
+			properties.put("mail.smtp.host", "smtp.163.com");
+			properties.setProperty("mail.transport.protocol", "smtp");
+			properties.put("mail.smtp.port", "25");
+			 //设置成需要邮件服务器认证
+			properties.put("mail.smtp.auth","true");
+			properties.put("mail.debug","true");
+			session=Session.getInstance(properties);
+			session.setDebug(true);
+			Message message = new MimeMessage(session);
+	        // 设置发件人
+	message.setFrom(new InternetAddress(mail.getSender()));
+	        // 设置收件人
+	message.addRecipient(RecipientType.TO, new InternetAddress(email));
+	// 设置标题
+	message.setSubject("重制密码");
+	//邮件内容
+	message.setContent("<p>尊敬的"+username+"用户：</p><p>您好!</p><p>您正在尝试重置密码！"
+	        +"您的验证码是："+str+"。</p><p>请妥善保管您的账号和密码。</p>", "text/html;charset=utf-8");
+	//发送邮件
+	Transport transport=session.getTransport("smtp");
+	transport.connect("smtp.163.com",mail.getUserName(),mail.getPassword());//以smtp方式登录邮箱
+	//发送邮件,其中第二个参数是所有已设好的收件人地址
+	transport.sendMessage(message,message.getAllRecipients());
+	transport.close();
+	//将姓名装入session,给服务器使用
+	req.getSession().setAttribute("username", username);
+	return 1;
+		}else {
+			return 0;
+		}
+		
+		
+	
+	}
+	
+	
+	//跳转到重制密码页面
+	@RequestMapping(value="/getnewPassWordPage",method=RequestMethod.POST)
+	public String getNewPassWordPage(String username,String VerificationCode,HttpServletRequest req,HttpServletResponse resp) throws UnsupportedEncodingException{
+		req.setCharacterEncoding("utf-8");
+		resp.setContentType("text/html;charset=utf-8");
+		//验证验证码是否正确
+		if(userService.selectUser(username).getVerificationCode().equals(VerificationCode)){
+			return  "GetNewPassWordPage";
+		}else {
+			return "验证码输入错误，请重试";
+		}	
+	}
+	//设置新密码
+	@RequestMapping(value="/setnewPassWord",method=RequestMethod.POST)
+	public String setNewPassWord(HttpServletRequest req,HttpServletResponse resp,String password) throws InterruptedException{
+		//取出session中被装入的姓名
+	String name=(String) req.getSession().getAttribute("username");
+	//将密码加盐加密
+	Object hashedCredentials = new SimpleHash("MD5", password, name, 1024);
+	User user=new User();
+	user.setUsername(name);
+	user.setPassword(hashedCredentials.toString());
+		userService.updatePassword(user);
+		
+		Thread thread = new Thread();// 休眠两秒
+		thread.sleep(2000);
+		 return "redirect:login.jsp";	
 		
 	}
 }

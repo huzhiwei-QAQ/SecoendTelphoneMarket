@@ -83,7 +83,7 @@ var unSelected = "#999";
                         <tbody>
                         	   <th>ID</th>
 								<th>员工姓名</th>
-								<th>员工密码</th>
+								<th>员工邮箱</th>
 					
 							    
 								<th class="text-right">员工职位</th>
@@ -92,7 +92,7 @@ var unSelected = "#999";
                             <tr>
                                 <td ><a href="#" style="color: #4d86f6"> <c:out value=" ${selectNewUser.nu_id}"></c:out></a></td>
                                   <td ><a href='<c:out value="#"></c:out>' style="color: #4d86f6"> <c:out value="${selectNewUser.name }"></c:out></a></td>
-                                    <td ><a href="#" style="color: #4d86f6"><c:out value="${selectNewUser.password }"></c:out></a></td>
+                                    <td ><a href="#" style="color: #4d86f6"><c:out value="${selectNewUser.email }"></c:out></a></td>
                               
                                    
                                      <td class="text-right"><a href="#" style="color: #4d86f6"><c:out value="${selectNewUser.roles }"></c:out></a></td> 

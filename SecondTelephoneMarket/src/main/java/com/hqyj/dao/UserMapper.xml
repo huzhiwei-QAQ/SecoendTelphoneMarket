@@ -7,7 +7,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="u_id" property="u_id"></result>
 		<result column="username" property="username"></result>
 		<result column="password" property="password"></result>
-		
+		<result column="email" property="email"></result>
+			<result column="verificationCode" property="verificationCode"></result>
 		<association property="role" javaType="com.hqyj.entity.Role">
 <result column="r_id" property="r_id"></result>
 		<result column="roles" property="roles"></result>
@@ -28,4 +29,11 @@ select *from user ,role,user_role where user.u_id=user_role.u_id and role.r_id=u
 delete from user where username=#{username}
 </delete>
 
+<update id="updateVerificationCode" parameterType="com.hqyj.entity.User">
+update user set verificationCode=#{verificationCode} where username=#{username}
+</update>
+
+<update id="updatePassword" parameterType="com.hqyj.entity.User">
+update user set password=#{password} where username=#{username}
+</update>
 </mapper>

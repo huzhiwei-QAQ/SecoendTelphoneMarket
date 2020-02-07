@@ -76,7 +76,8 @@ var unSelected = "#999";
 							<button class="btn btn-default" type="button">添加新员工</button>
 						</span>
 						 <input type="text" class="form-control" placeholder="请输入你的姓名:"name="name" > 
-							<input type="text" class="form-control" placeholder="请设置你的密码:" name="password" >					
+						 <input type="email" class="form-control" placeholder="请输入你的邮箱:" name="email" >
+							<input type="text" class="form-control" placeholder="请设置你的密码:" name="password" >				
 						    <select type="text" class="form-control"  name="roles"  id="roles" ><select>
 					
 						<span class="input-group-btn">
