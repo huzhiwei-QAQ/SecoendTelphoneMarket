@@ -795,6 +795,6 @@ req.setAttribute("pageInfo", pageInfo);
 		Thread thread = new Thread();// 休眠两秒
 		thread.sleep(2000);
 		 return "redirect:login.jsp";	
-		
+
 	}
 }
