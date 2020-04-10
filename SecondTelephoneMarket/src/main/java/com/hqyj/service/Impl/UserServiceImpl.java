@@ -34,6 +34,7 @@ public int deleteUserbyName(String username) {
 
 @Override
 public int updateVerificationCode(User user) {
+	
 	int updateVerificationCode = UserMapper.updateVerificationCode(user);
 	return updateVerificationCode;
 }

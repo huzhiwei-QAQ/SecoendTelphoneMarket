@@ -676,7 +676,7 @@ req.setAttribute("pageInfo", pageInfo);
 		// 获取图片后缀
 		String extName = oriName.substring(oriName.lastIndexOf("."));
 		// 开始上传 准备移动
-		file.transferTo(new File("F:/program files/JavaWorkspace/SecondTelephoneMarket/src/main/webapp/img/" + picName + extName));
+		file.transferTo(new File("F:/program files/git-repository/SecondTelephoneMarket/src/main/webapp/img/" + picName + extName));
 
 		ResourcesManage resourcesManage=new ResourcesManage();
 		resourcesManage.setType(type);
@@ -765,9 +765,6 @@ req.setAttribute("pageInfo", pageInfo);
 		}else {
 			return 0;
 		}
-		
-		
-	
 	}
 	
 	
