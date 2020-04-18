@@ -22,12 +22,15 @@ $(function(){
 	$("#btn1").click(function(){
 		types=$("#type1").val();
 		alert("你输入的型号为"+types);
-		
+		  var saveDataAry=[];  
+		var data1={"type":types};
+		saveDataAry.push(data1);
 		$.ajax({
 			url:"selectpurchasestatement",
 			type:"post",
 		    dataType:"json",
-		    data:{"types":types},
+		    contentType:"application/json;charset=UTF-8",
+		    data:JSON.stringify(data1),
 			success:function(data){				
 $("#div1").append("采购型号:"+data.type+"  采购价:"+data.price+"  总采购数:"+data.num+"  该机型总采购结款:"+data.priceall+"<br>");
 			}    

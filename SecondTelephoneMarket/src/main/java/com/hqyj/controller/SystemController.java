@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -416,10 +418,12 @@ public class SystemController {
 	// 查询某机型采购结款
 	@RequestMapping(value = "selectpurchasestatement", method = RequestMethod.POST)
 	@ResponseBody
-	public GoodsStatistics selectPurchaseStatement(String types, HttpServletRequest req, HttpServletResponse resp)
+	public GoodsStatistics selectPurchaseStatement(@RequestBody Map<String, String> map, HttpServletRequest req, HttpServletResponse resp)
 			throws UnsupportedEncodingException {
 		req.setCharacterEncoding("utf-8");
 		resp.setContentType("text/html;charset=utf-8");
+		System.out.println("type:"+map);
+	String types= map.get("type");
 		GoodsStatistics selectGoodsStatisticsOne = goodsStatisticsService.selectGoodsStatisticsOne(types);
 		return selectGoodsStatisticsOne;
 	}
@@ -436,7 +440,7 @@ public class SystemController {
 	// 查询某机型销售结款
 	@RequestMapping(value = "selectsalespayment", method = RequestMethod.POST)
 	@ResponseBody
-	public ProductSaled selectSalesPayment(String types) {
+	public ProductSaled selectSalesPayment(@RequestParam String types) {
 		ProductSaled selectProductSaledOne = productSaledMapper.selectProductSaledOne(types);
 		return selectProductSaledOne;
 	}
