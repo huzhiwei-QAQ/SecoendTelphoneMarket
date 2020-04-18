@@ -5,6 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -13,8 +16,10 @@ import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sound.midi.VoiceStatus;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -63,8 +68,10 @@ import com.hqyj.service.PurchaseService;
 import com.hqyj.service.ResourcesManageService;
 import com.hqyj.service.RoleService;
 import com.hqyj.service.SupplierService;
+import com.hqyj.service.TimeService;
 import com.hqyj.service.UserRoleService;
 import com.hqyj.service.UserService;
+import com.sun.mail.handlers.text_html;
 
 import java.util.Properties;
 import java.util.Random;
@@ -116,6 +123,8 @@ public class SystemController {
 	private NoticeService noticeService;
      @Autowired
     private ResourcesManageService resourcesManageService;
+     @Autowired
+     private TimeService timeService;
 
 
 	// 查询所有产品
@@ -415,6 +424,19 @@ public class SystemController {
 		return "redirect:getGoodsAndproduct";
 	}
 
+	@RequestMapping(value="gettime",method=RequestMethod.POST) 
+	public void gettime(@RequestBody Map<String,Date>map){
+		 System.out.println("map:"+map);
+		  Date date=	map.get("time");
+		  System.out.println("date:"+date);
+		  SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		  String time= simpleDateFormat.format(date);
+		  System.out.println(time);
+		  timeService.setTime(time);
+		 
+		System.out.println("时间是："+ timeService.gettime(1));
+	}
+	
 	// 查询某机型采购结款
 	@RequestMapping(value = "selectpurchasestatement", method = RequestMethod.POST)
 	@ResponseBody
@@ -801,4 +823,9 @@ req.setAttribute("pageInfo", pageInfo);
 		 return "redirect:login.jsp";	
 
 	}
+
+	
 }
+
+
+

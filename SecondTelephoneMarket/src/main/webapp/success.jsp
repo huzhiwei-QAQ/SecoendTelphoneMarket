@@ -22,7 +22,7 @@ $(function(){
 	$("#btn1").click(function(){
 		types=$("#type1").val();
 		alert("你输入的型号为"+types);
-		  var saveDataAry=[];  
+		  var saveDataAry=[];  /*  */
 		var data1={"type":types};
 		saveDataAry.push(data1);
 		$.ajax({
@@ -76,6 +76,23 @@ $("#div3").append("销售型号:"+data.type+"  销售价:"+data.price+"  总销�
 			success:function(data){				
 $("#div4").append("所有机型总销售结款:"+data.price+"<br>");
 			}    
+		});
+	});
+	
+	$("#btn5").click(function(){
+		var times=$("#time").val();
+		alert(times);
+	/* 	 var times2 = new Date(times); */
+		/* 	alert(times2); */
+		var saveDataAry=[]; 
+		var data2={"time":times};
+		saveDataAry.push(data2);
+		$.ajax({
+			url:"gettime",
+			type:"post",
+		    dataType:"json", 
+		    contentType:"application/json;charset=UTF-8",
+		    data:JSON.stringify(data2)	
 		});
 	});
 	
@@ -300,9 +317,9 @@ $("#div4").append("所有机型总销售结款:"+data.price+"<br>");
       <span class="input-group-btn">
         <button class="btn btn-default" type="button">关键字</button>
       </span>
-      <input type="text" class="form-control"  placeholder="请输入关键字">
+      <input type="date" class="form-control"  placeholder="请输入关键字" id="time">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button">搜索</button>
+        <button class="btn btn-default" type="button" id="btn5">搜索</button>
       </span>
    </div>
 </div>
@@ -335,8 +352,9 @@ $("#div4").append("所有机型总销售结款:"+data.price+"<br>");
 
   </div>        
 
-  
+
   <div class="col-sm-2"></div>  
+
 
   <div align="center">       
  
